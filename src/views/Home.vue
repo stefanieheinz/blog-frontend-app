@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     indexPosts: function () {
-      axios.get("http://localhost:3000/posts").then((response) => {
+      axios.get("/posts").then((response) => {
         this.posts = response.data;
         console.log("All posts", this.posts);
       });
@@ -68,7 +68,7 @@ export default {
         image: this.newPostImage,
       };
       axios
-        .post("http://localhost:3000/posts", params)
+        .post("/posts", params)
         .then((response) => {
           console.log(response.data);
           this.posts.push(response.data);
@@ -87,13 +87,13 @@ export default {
         body: post.body,
         image: post.image,
       };
-      axios.patch("http://localhost:3000/posts/" + post.id, params).then((response) => {
+      axios.patch("/posts/" + post.id, params).then((response) => {
         console.log("Update success", response.data);
       });
     },
     destroyPost: function (post) {
       console.log("destroy post", post);
-      axios.delete("http://localhost:3000/posts/" + post.id).then((response) => {
+      axios.delete("/posts/" + post.id).then((response) => {
         console.log("Destroy success", response.data);
         var index = this.posts.indexOf(post);
         this.posts.splice(index, 1);
